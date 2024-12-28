@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рэпэтытар ЦТ</title>
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+		
+        header {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px;
+            position: relative;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu a {
+            color: #ffc107;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #ffee58;
+        }
+
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .burger-menu div {
+            width: 100%;
+            height: 4px;
+            background-color: #ffc107;
+            transition: transform 0.3s;
+        }
+
+        .burger-menu.active .line1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger-menu.active .line2 {
+            opacity: 0;
+        }
+
+        .burger-menu.active .line3 {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .feedback-form {
+            max-width: 600px; /* Максимальная ширина формы */
+            margin: 20px auto; /* Центрирование формы */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feedback-form h2 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        .feedback-form input,
+        .feedback-form textarea {
+            width: 100%; /* Поля занимают всю ширину */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .achievement-card img {
+            display: block; /* Center the image */
+            margin: 0 auto; /* Center margin */
+            width: 100px; /* Adjust width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px;
+        }
+
+        .technology-card img {
+            display: block; /* Center the image */
+            margin: 0 auto; /* Center margin */
+            width: 100px; /* Adjust width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px;
+        }
+
+
+        .feedback-form button {
+            background-color: #ffc107; 
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%; /* Кнопка также занимает всю ширину */
+            transition: background-color 0.3s;
+        }
+
+        .feedback-form button:hover {
+            background-color: #ffee58; 
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: #343a40;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .mobile-menu a {
+            color: #ffc107;
+            text-decoration: none;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .mobile-menu a:hover {
+            color: #ffee58;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .feedback-form {
+                width: 90%; /* Ширина формы на мобильных устройствах */
+                margin: 20px auto; /* Центрирование формы */
+            }
+        }
+
+        .profile-photo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo img {
+            max-width: 200px;
+            border-radius: 50%;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .desc {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .desc h1 {
+            font-size: 2.5em;
+            margin: 0 0 10px;
+        }
+
+        .desc h2 {
+            font-size: 1.8em;
+            margin: 0 0 10px;
+            color: #ffc107;
+        }
+
+        .desc p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .new-box1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .new-box1 a {
+            color: #ffc107;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            font-size: 1.2em;
+        }
+
+        .new-box1 a:hover {
+            color: yellow;
+        }
+
+        .achievements-section,
+        .technologies-section {
+            padding: 60px 20px;
+            color: #ffffff;
+        }
+
+        .achievements-section {
+            background-image: url('матухна зямля.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .technologies-section {
+            background-image: url('мінск.jpg');
+        }
+
+        .achievements-title,
+        .technologies-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffc107;
+        }
+
+        .achievements-container,
+        .technologies-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 30px;
+        }
+
+        .achievement-card,
+        .technology-card {
+            background-color: rgba(73, 80, 87, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            flex: 1 0 250px;
+            max-width: 300px;
+        }
+
+        .achievement-card:hover,
+        .technology-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .achievement-card img,
+        .technology-card img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .achievement-card h3,
+        .technology-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #ffc107;
+        }
+
+        .achievement-card p,
+        .technology-card p {
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .achievements-container,
+            .technologies-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#about">Пра мяне</a></li>
+                <li><a href="#achievements">Дасягненні</a></li>
+                <li><a href="#technologies">Тэхналогіі</a></li>
+                <li><a href="mailto:olegandreichsud@gmail.com">Кантакты</a></li>
+            </ul>
+            <div class="burger-menu" id="burgerMenu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#about">Пра мяне</a>
+                <a href="#achievements">Дасягненні</a>
+                <a href="#technologies">Тэхналогіі</a>
+                <a href="mailto:olegandreichsud@gmail.com">Кантакты</a>
+            </div>
+        </nav>
+        <div class="profile-photo">
+            <img src="starostau.jpg" alt="Мое фото или тематическое изображение">
+        </div>
+        <div class="desc" id="about">
+            <h1>Алег Суднік</h1>
+            <h2>Рэпетытар па беларускай мове</h2>
+            <p>Студэнт Акадэміі кіравання пры Прэзідэнце Рэспублікі Беларусь</p>
+        </div>
+        <div class="new-box1">
+            <a href="Судник.html" class="button">Мая біяграфія</a>
+        </div>
+        <div class="new-box1">
+            <a href="mailto:olegandreichsud@gmail.com" class="button">Звязацца са мной</a>
+        </div>
+    </header>
+
+    <div class="achievements-section" id="achievements">
+        <h2 class="achievements-title">Мае дасягненні</h2>
+        <div class="achievements-container">
+            <div class="achievement-card">
+                <img src="оц.jpg" alt="ЦТ">
+                <h3>Высокі бал на ЦТ</h3>
+                <p>Сярэдні бал на ЦТ сярод маіх навучэнцаў - 96.</p>
+            </div>
+            <div class="achievement-card">
+                <img src="ол.jpg" alt="Алімпіяды">
+                <h3>Поспехі ў алімпіядзім руху</h3>
+                <p>Мае навучэнцы перамагаюць на рэгіянальных і рэспубліканскіх конкурсах і алімпіядах!</p>
+            </div>
+            <div class="achievement-card">
+                <img src="н.png" alt="Навука">
+                <h3>Навука</h3>
+                <p>З'яўляюся аўтарам 2 навуковых прац і 15 тэзісаў і артыкулаў.</p>
+            </div>
+            <div class="achievement-card">
+                <img src="тт.jpg" alt="Праграма">
+                <h3>Праграма</h3>
+                <p>Аўтарская вучэбная праграма з вялікай колькасцю тэстаў і іншых матэрыялаў для вывучэння мовы.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="technologies-section" id="technologies">
+        <h2 class="technologies-title">Тэхналогіі і веды, якімі я валодаю</h2>
+        <div class="technologies-container">
+            <div class="technology-card">
+                <img src="вд.jpg" alt="Вэб-дызайн">
+                <h3>Вэб-дызайн</h3>
+                <p>Стварэнне вэб-старонак з тэматычнымі заданнямі на роднай мове для замацавання ведаў.</p>
+            </div>
+            <div class="technology-card">
+                <img src="гіст.png" alt="Гісторыя">
+                <h3>Гісторыя</h3>
+                <p>Паглыблена ведаю гісторыю тых ці іншых аспектаў развіцця роднай мовы.</p>
+            </div>
+            <div class="technology-card">
+                <img src="паэзія.png" alt="Літаратура">
+                <h3>Літаратура</h3>
+                <p>Шчыра зацікаўлены ў напісанні вершаў на беларускай мове.</p>
+            </div>
+            <div class="technology-card">
+                <img src="вучыся.jpg" alt="Любоў да вучобы">
+                <h3>Псіхалогія</h3>
+                <p>Здольны прышчапіць любоў да вучобы раз і назаўсёды.</p>
+            </div>
+            <div class="technology-card">
+                <img src="навука.jpg" alt="Навука.js">
+                <h3>Напісанне навуковых артыкулаў</h3>
+                <p>Дапамагу пачаць шлях у навуку</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="feedback-form">
+        <h2>Форма зваротнай сувязі</h2>
+        <form action="https://getform.io/f/amddxlrb" method="POST">
+            <input type="text" name="name" placeholder="Ваша імя і прозвішча" required>
+            <input type="email" name="email" placeholder="Ваш email-адрас" required>
+            <textarea name="message" rows="5" placeholder="Ваша паведамленне" required></textarea>
+            <button type="submit">Адправіць</button>
+        </form>
+    </div>
+
+    <script>
+        const burgerMenu = document.getElementById('burgerMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.querySelectorAll('.new-box1 a').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Вы націснулі на кнопку: ' + button.textContent);
+            });
+        });
+    </script>
+</body>
+</html>
